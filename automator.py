@@ -15,6 +15,7 @@
 #usr/bin/python
 
 import argparse
+import os
 
 
 parser = argparse.ArgumentParser(description='The Project build, test and launch point')
@@ -43,8 +44,7 @@ parser.set_defaults(load=None)
 args = parser.parse_args()
 
 if args.build != None:
-	if args.build == 'micropython':
-	    print 'Build MicroPython'
+	if args.build == 'micropython': os.system('python micropython_build.py')
 
 if args.validate != None:
 	if args.validate == 'micropython': print 'Validate MicroPython'
@@ -54,7 +54,7 @@ if args.validate != None:
 	else: print 'Unclear requirement'
 
 if args.load != None:
-	if args.load == 'micropython': print 'Load MicroPython'
+	if args.load == 'micropython': os.system('python micropython_load.py')
 	elif args.load == 'weatherStation': print 'Load weatherStation'
 	elif args.load == 'boiler': print 'Load boiler'
 	elif args.load == 'column': print 'Load column'
