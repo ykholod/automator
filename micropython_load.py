@@ -21,6 +21,6 @@ for sec in [5,4,3,2,1]:
 if (os.path.exists('/vagrant/firmware-combined.bin')):
     print 'Run, Forrest, run'
     os.chdir('/home/vagrant/micropython')
-    os.system('/home/vagrant/esptool/esptool.py --port=/dev/cu.SLAB_USBtoUART  write_flash  -fm=dio -fs=detect 0x00000 /vagrant/firmware-combined.bin')
+    os.system('/home/vagrant/esptool/esptool.py --port=/dev/ttyUSB0  write_flash  -fm=dio -fs=detect 0x00000 /vagrant/firmware-combined.bin')
 else:
     print 'File not present. Please, build MicroPython.'

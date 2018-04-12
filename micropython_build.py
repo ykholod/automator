@@ -14,11 +14,14 @@
 import os
 from shutil import copyfile
 
+CC_PATH = 'xtensa-lx106-elf'
 print 'Building ESP open SDK'
 os.chdir('/home/vagrant/esp-open-sdk')
 os.system('make STANDALONE=y')
-os.system('export PATH=/home/vagrant/esp-open-sdk/xtensa-lx106-elf/bin:$PATH')
-os.system('echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile')
+path = os.environ['PATH']
+if CC_PATH not in path:
+    os.system('export PATH=/home/vagrant/esp-open-sdk/xtensa-lx106-elf/bin:$PATH')
+    os.system('echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile')
 
 print 'Building MicroPython image'
 os.chdir('/home/vagrant/micropython')
@@ -30,4 +33,5 @@ if (os.path.exists('./build/firmware-combined.bin')):
     copyfile('./build/firmware-combined.bin', '/vagrant/firmware-combined.bin')
     print 'Success: /vagrant/firmware-combined.bin image built'
 else:
-    print 'Fail to build MicroPython image with ESP open SDK'
+    print 'Fail to build MicroPython image with ESP open SDK\n'
+    print 'Try to reboot VM and build again.'
