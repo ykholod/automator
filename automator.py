@@ -24,17 +24,17 @@ subparsers = parser.add_subparsers(help='List of commands')
 # A build command
 list_parser = subparsers.add_parser('build', help='Build some target')
 list_parser.add_argument('build', type=str, help='Build MicroPython image',
-	                     choices=['micropython'])
+	                 choices=['micropython'])
 
 # A validate command
 validate_parser = subparsers.add_parser('validate', help='Validate available script')
 validate_parser.add_argument('validate', type=str, help='Validate your code',
-	                         choices=['micropython','weatherStation','boiler','column'])
+	                     choices=['micropython','ws','boiler','column'])
 
 # A load command
 create_parser = subparsers.add_parser('load', help='Board the system')
 create_parser.add_argument('load', type=str, help='Upload MicroPython image',
-	                        choices=['micropython','weatherStation','boiler','column'])
+	                   choices=['micropython','ws','boiler','column'])
 
 # Parser default values
 parser.set_defaults(build=None)
@@ -44,18 +44,18 @@ parser.set_defaults(load=None)
 args = parser.parse_args()
 
 if args.build != None:
-	if args.build == 'micropython': os.system('python micropython_build.py')
+	if args.build == 'micropython': os.system('sudo python scripts/micropython_build.py')
 
 if args.validate != None:
 	if args.validate == 'micropython': print 'Validate MicroPython'
-	elif args.validate == 'weatherStation': print 'Validate weatherStation'
+	elif args.validate == 'ws': print 'Validate weather-station'
 	elif args.validate == 'boiler': print 'Validate boiler'
 	elif args.validate == 'column': print 'Validate column'
 	else: print 'Unclear requirement'
 
 if args.load != None:
-	if args.load == 'micropython': os.system('python micropython_load.py')
-	elif args.load == 'weatherStation': print 'Load weatherStation'
+	if args.load == 'micropython': os.system('sudo python scripts/micropython_load.py')
+	elif args.load == 'ws': os.system('sudo python scripts/weatherstation_load.py')
 	elif args.load == 'boiler': print 'Load boiler'
 	elif args.load == 'column': print 'Load column'
 	else: print 'Unclear requirement'

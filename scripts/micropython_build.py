@@ -22,6 +22,8 @@ path = os.environ['PATH']
 if CC_PATH not in path:
     os.system('export PATH=/home/vagrant/esp-open-sdk/xtensa-lx106-elf/bin:$PATH')
     os.system('echo "PATH=$(pwd)/xtensa-lx106-elf/bin:\$PATH" >> ~/.profile')
+    print 'Please reboot VM and start again'
+    print 'Reboot can be done with vagrant halt/vagrant up commands'
 
 print 'Building MicroPython image'
 os.chdir('/home/vagrant/micropython')
@@ -34,4 +36,3 @@ if (os.path.exists('./build/firmware-combined.bin')):
     print 'Success: /vagrant/firmware-combined.bin image built'
 else:
     print 'Fail to build MicroPython image with ESP open SDK\n'
-    print 'Try to reboot VM and build again.'
